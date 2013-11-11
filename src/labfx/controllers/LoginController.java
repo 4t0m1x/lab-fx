@@ -9,9 +9,11 @@ import javafx.scene.text.Text;
 import labfx.auth.Auth;
 import labfx.auth.LoginObject;
 import labfx.auth.LoginStatus;
+import labfx.controllers.page.PageFunction;
+import labfx.models.User;
 
 
-public class LoginController {
+public class LoginController extends PageFunction<User> {
     @FXML private TextField userName;
     @FXML private PasswordField password;
     @FXML private Text errorText;
@@ -35,11 +37,17 @@ public class LoginController {
         }
     }
 
-    public void signIn(ActionEvent actionEvent) {
+    @FXML
+    private void signIn(ActionEvent actionEvent) {
         if (userName.getText().isEmpty() || password.getText().isEmpty())
             return;
 
         LoginObject loginObject = Auth.logIn(userName.getText(), password.getText());
-        setLoggedIn(loginObject);
+        if (loginObject.getStatus() == LoginStatus.LoggedIn) {
+            onReturn(loginObject.getUser());
+        }
+        else {
+            setLoggedIn(loginObject);
+        }
     }
 }
