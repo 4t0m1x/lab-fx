@@ -4,3 +4,9 @@
 *.jar
 *.war
 *.ear
+
+.idea
+src/hibernate.cfg.xml
+src/META-INF
+
+out
