@@ -5,6 +5,6 @@ package labfx.controllers.page;
  * Date: 11.11.13
  * Time: 20:42
  */
-public interface PageReturnAction<T> {
+public interface Action<T> {
     void action(EventArgs<T> e);
 }

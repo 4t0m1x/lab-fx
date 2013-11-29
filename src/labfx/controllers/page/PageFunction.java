@@ -6,9 +6,19 @@ package labfx.controllers.page;
  * Time: 20:36
  */
 public class PageFunction<T> {
-    PageReturnAction<T> returnAction;
+    private Action<T> returnAction;
+    private Object parameter;
 
-    public void setReturnAction(PageReturnAction<T> value) {
+    public void setParameter(Object parameter) {
+        this.parameter = parameter;
+        onParameterChanged();
+    }
+
+    protected Object getParameter() {
+        return parameter;
+    }
+
+    public void setReturnAction(Action<T> value) {
         returnAction = value;
     }
 
@@ -17,4 +27,6 @@ public class PageFunction<T> {
             returnAction.action(new EventArgs<T>(this, eventData));
         }
     }
+
+    protected void onParameterChanged() { }
 }
