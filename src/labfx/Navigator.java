@@ -4,8 +4,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.Region;
 import javafx.stage.Stage;
+import labfx.controllers.page.Page;
 import labfx.controllers.page.PageFunction;
 import labfx.views.View;
 
@@ -18,7 +18,7 @@ import java.io.IOException;
  */
 public final class Navigator {
 
-    public static <T extends PageFunction<?>> T loadInto(Pane root, View view) {
+    public static <T extends Page> T loadInto(Pane root, View view) {
         FXMLLoader loader = new FXMLLoader(Main.class.getResource(view.toString()));
         try
         {
@@ -31,12 +31,18 @@ public final class Navigator {
             return null;
         }
 
+        Object controller = loader.getController();
+        if (controller instanceof Page) {
+            Page page = (Page)controller;
+            page.onLoaded();
+            return (T)page;
+        }
 
-        return loader.getController();
+        return null;
     }
 
-    public static <T extends PageFunction<?>> T loadPage(Stage host, View view, double width,
-                                double height, String title) throws IOException {
+    public static <T extends Page> T loadView(Stage host, View view, double width,
+                                                         double height, String title) throws IOException {
         FXMLLoader loader = new FXMLLoader(Main.class.getResource(view.toString()));
         Parent root = (Parent)loader.load();
         host.setTitle(title);
@@ -50,12 +56,12 @@ public final class Navigator {
         return loader.getController();
     }
 
-    public static <T extends PageFunction<?>> T loadPage(Stage host, View view, double width, double height)
+    public static <T extends Page> T loadView(Stage host, View view, double width, double height)
             throws IOException {
-        return loadPage(host, view, width, height, "Untitled");
+        return loadView(host, view, width, height, "Untitled");
     }
 
-    public static <T extends PageFunction<?>> T loadPage(Stage host, View view) throws IOException {
-        return loadPage(host, view, 640, 480);
+    public static <T extends Page> T loadView(Stage host, View view) throws IOException {
+        return loadView(host, view, 640, 480);
     }
 }

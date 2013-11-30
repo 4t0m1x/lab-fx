@@ -1,0 +1,25 @@
+.button {
+    -fx-font-size: 14;
+    -fx-font-family: "Segoe UI Semibold";
+
+    -fx-background-insets: 0;
+    -fx-background-radius: 0;
+    -fx-background-color: transparent;
+    -fx-text-fill: white;
+
+    -fx-border-width: 2;
+    -fx-border-color: white;
+}
+
+.button:hover {
+    -fx-background-color: rgba(255, 255, 255, 0.1);
+}
+
+.button:pressed {
+    -fx-background-color: white;
+    -fx-text-fill: black;
+}
+
+.button:focused {
+    -fx-border-width: 2.5;
+}

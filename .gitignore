@@ -8,5 +8,6 @@
 .idea
 src/hibernate.cfg.xml
 src/META-INF
+media
 
 out

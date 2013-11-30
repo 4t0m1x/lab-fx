@@ -1,11 +1,10 @@
 package labfx.controllers;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
 import labfx.Navigator;
-import labfx.controllers.page.PageFunction;
+import labfx.controllers.page.Page;
 import labfx.models.User;
 import labfx.views.View;
 
@@ -13,11 +12,11 @@ import labfx.views.View;
  * Date: 28.11.13
  * Time: 21:29
  */
-public class MainController extends PageFunction<User> {
+public class MainController extends Page {
     @FXML
     private GridPane contentRoot;
     @FXML
-    private PageFunction<Object> contentController;
+    private Page contentPage;
 
     @FXML
     private Button btnUsers;
@@ -33,18 +32,22 @@ public class MainController extends PageFunction<User> {
         {
             user = (User)parameter;
             btnUsers.setVisible(user.getAdmin());
-            loadPage(View.PLAYER);
+            showMediaPlayer();
         }
     }
 
-    private void loadPage(View view)
+    private void loadView(View view)
     {
-        contentController = Navigator.loadInto(contentRoot, view);
+        contentPage = Navigator.loadInto(contentRoot, view);
     }
 
     @FXML
-    private void showMediaPlayer(ActionEvent actionEvent) {
-        loadPage(View.PLAYER);
+    private void showMediaPlayer() {
+        loadView(View.PLAYER);
+    }
 
+    @FXML
+    private void showUsers() {
+        loadView(View.USERS);
     }
 }

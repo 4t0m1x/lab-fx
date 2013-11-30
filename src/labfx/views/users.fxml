@@ -1,0 +1,9 @@
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.text.Text?>
+<?import java.net.URL?>
+<GridPane xmlns:fx="http://javafx.com/fxml">
+    <Text styleClass="caption">Users</Text>
+    <stylesheets>
+        <URL value="@../styles/text.css"/>
+    </stylesheets>
+</GridPane>

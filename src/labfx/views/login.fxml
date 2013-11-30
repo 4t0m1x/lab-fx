@@ -2,30 +2,46 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Text?>
 <?import java.net.URL?>
+<?import javafx.geometry.Insets?>
 <GridPane fx:controller="labfx.controllers.LoginController"
-          xmlns:fx="http://javafx.com/fxml" alignment="center" hgap="10" vgap="10">
-    <Text id="welcome-label" text="Welcome" GridPane.columnSpan="2"
-          GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+          xmlns:fx="http://javafx.com/fxml"
+          fx:id="gridPane"
+          styleClass="background"
+          style="-fx-padding: 0 20 20 20"
+          alignment="TOP_CENTER" hgap="10" vgap="10">
 
-    <Label text="Username:"
+    <GridPane style="-fx-padding: 8 8 8 20;" styleClass="caption-pane" GridPane.columnSpan="2">
+        <GridPane.margin>
+            <Insets left="-20" right="-20" bottom="8"/>
+        </GridPane.margin>
+        <Text styleClass="caption" text="Welcome"
+              GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+    </GridPane>
+
+    <Label text="Username:" styleClass="label"
            GridPane.rowIndex="1" GridPane.columnIndex="0"/>
-    <TextField fx:id="userName"
+    <TextField fx:id="userName" styleClass="field"
+               GridPane.hgrow="ALWAYS"
                GridPane.rowIndex="1" GridPane.columnIndex="1"/>
 
-    <Label text="Password:"
+    <Label text="Password:" styleClass="label"
            GridPane.rowIndex="2" GridPane.columnIndex="0"/>
-    <PasswordField fx:id="password"
+    <PasswordField fx:id="password" styleClass="field"
                    GridPane.rowIndex="2" GridPane.columnIndex="1"
                    onAction="#signIn"/>
 
-    <Text fx:id="errorText" id="error-text"
-          GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+    <Label fx:id="errorText" styleClass="error-text"
+          GridPane.rowIndex="3" GridPane.columnIndex="0" GridPane.columnSpan="2"/>
 
-    <Button text="Sign in" alignment="BOTTOM_RIGHT"
+    <Button text="Sign in" GridPane.halignment="RIGHT"
             GridPane.rowIndex="3" GridPane.columnIndex="1"
             onAction="#signIn"/>
 
     <stylesheets>
+        <URL value="@../styles/global.css"/>
+        <URL value="@../styles/text.css"/>
+        <URL value="@../styles/field.css"/>
         <URL value="@../styles/login.css"/>
+        <URL value="@../styles/button.css"/>
     </stylesheets>
 </GridPane>

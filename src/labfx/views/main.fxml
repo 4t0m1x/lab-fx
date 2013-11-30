@@ -12,23 +12,32 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane minHeight="100.0" minWidth="300.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="labfx.controllers.MainController">
+<?import java.net.URL?>
+<BorderPane minHeight="100.0" minWidth="300.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2"
+            fx:controller="labfx.controllers.MainController"
+            styleClass="background">
   <top>
-      <GridPane fx:id="contentRoot"/>
+      <GridPane fx:id="contentRoot" alignment="CENTER"/>
   </top>
   <bottom>
-    <HBox alignment="BOTTOM_CENTER" prefHeight="251.0" prefWidth="400.0">
-      <children>
-        <Button mnemonicParsing="false" text="Player" onAction="#showMediaPlayer">
-          <HBox.margin>
-            <Insets />
-          </HBox.margin>
-        </Button>
-        <Button mnemonicParsing="false" text="Users" fx:id="btnUsers"/>
-      </children>
-      <BorderPane.margin>
-        <Insets bottom="20.0" />
-      </BorderPane.margin>
-    </HBox>
+      <HBox alignment="BOTTOM_CENTER" prefHeight="251.0" prefWidth="400.0">
+          <BorderPane.margin>
+              <Insets bottom="20.0"/>
+          </BorderPane.margin>
+          <Button text="Player" onAction="#showMediaPlayer" style="-fx-padding: 15">
+              <HBox.margin>
+                  <Insets top="5" left="5" right="5" bottom="5"/>
+              </HBox.margin>
+          </Button>
+          <Button text="Users" onAction="#showUsers" fx:id="btnUsers" style="-fx-padding: 15">
+              <HBox.margin>
+                  <Insets top="5" left="5" right="5" bottom="5"/>
+              </HBox.margin>
+          </Button>
+      </HBox>
   </bottom>
+  <stylesheets>
+      <URL value="@../styles/global.css"/>
+      <URL value="@../styles/button.css"/>
+  </stylesheets>
 </BorderPane>

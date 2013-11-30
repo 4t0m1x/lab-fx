@@ -1,8 +1,5 @@
-#welcome-label {
-    -fx-font-family: "Segoe UI Light", sans-serif;
-    -fx-font-size: 20;
-}
-
-#error-text {
-    -fx-fill: red;
+.error-text {
+    -fx-font-family: "Segoe UI Semibold", sans-serif;
+    -fx-font-size: 16pt;
+    -fx-text-fill: #c81111;
 }

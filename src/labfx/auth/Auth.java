@@ -2,6 +2,7 @@ package labfx.auth;
 
 import labfx.data.GenericDAO;
 import labfx.models.User;
+import org.hibernate.HibernateException;
 
 /**
  * Date: 01.11.13
@@ -10,10 +11,18 @@ import labfx.models.User;
 public class Auth {
 
     public static LoginObject logIn(String userName, String password) {
-        GenericDAO<User> userDAO = new GenericDAO<User>(User.class);
-        User user = userDAO.getByField("userName", userName);
+        User user;
+        try
+        {
+            GenericDAO<User> userDAO = new GenericDAO<User>(User.class);
+            user = userDAO.getByField("userName", userName);
 
-        if (user == null) return new LoginObject(null, LoginStatus.Error);
+        } catch (HibernateException e)
+        {
+            return new LoginObject(null, LoginStatus.Error);
+        }
+
+        if (user == null) return new LoginObject(null, LoginStatus.Rejected);
 
         if (user.getPassword().equals(password)) {
             if (user.getBanned()) {

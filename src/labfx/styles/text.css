@@ -1,0 +1,11 @@
+.caption {
+    -fx-font-family: "Segoe UI Light", sans-serif;
+    -fx-font-size: 22pt;
+    -fx-fill: white;
+}
+
+.label {
+    -fx-font-family: "Segoe UI", sans-serif;
+    -fx-font-size: 14pt;
+    -fx-text-fill: white;
+}
