@@ -15,7 +15,7 @@ public class TwoWayEnumeratorImpl<T> implements TwoWayEnumerator<T> {
         if (collection == null) throw new IllegalArgumentException();
         this.collection = collection;
         iterator = collection.iterator();
-        buffer = new ArrayList<T>();
+        buffer = new ArrayList<>();
         index = -1;
     }
 

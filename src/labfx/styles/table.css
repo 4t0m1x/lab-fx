@@ -1,0 +1,77 @@
+.table-view {
+    -fx-background-color: -theme-background;
+    -fx-background-insets: 0;
+
+    -fx-font-size: 14pt;
+    -fx-font-smoothing-type: lcd;
+}
+
+.table-row-cell {
+    -fx-background-color: -theme-background;
+    -fx-text-fill: -theme-foreground;
+}
+
+.table-cell {
+    -fx-background-color: derive(-theme-background, 5%);
+    -fx-text-fill: -theme-foreground;
+    -fx-alignment: center;
+    -fx-border-width: 0 1 0 0;
+    -fx-border-color: -theme-accent;
+}
+
+.table-cell:odd {
+    -fx-background-color: derive(-theme-background, 10%);
+}
+
+.table-row-cell:hover .table-cell {
+    -fx-background-color: derive(-theme-background, 20%);
+}
+
+.table-row-cell:selected .table-cell {
+    -fx-text-fill: -theme-foreground;
+    -fx-background-color: derive(-theme-background, 30%);
+}
+
+.table-view .column-header-background {
+    -fx-background-color: -theme-background;
+}
+
+.table-view .column-header {
+    -fx-background-color: derive(-theme-background, 5%);
+    -fx-border-color: -theme-accent;
+    -fx-border-width: 0 1 1 0;
+}
+
+.table-view .column-header .label {
+    /*-fx-font-family: "Segoe UI Light";*/
+    -fx-font-size: 16pt;
+    -fx-font-smoothing-type: lcd;
+    -fx-text-fill: -theme-accent;
+}
+
+.table-view .filler {
+    -fx-background-color: -theme-background;
+    -fx-border-width: 0;
+}
+
+.table-view .arrow {
+    -fx-background-color: -theme-accent;
+}
+
+
+.table-view *.scroll-bar:horizontal *.increment-button,
+.table-view *.scroll-bar:horizontal *.decrement-button {
+    -fx-background-color: null;
+    -fx-background-radius: 0;
+    -fx-background-insets: 0;
+    -fx-padding: 0;
+}
+
+.table-view *.scroll-bar:horizontal *.increment-arrow,
+.table-view *.scroll-bar:horizontal *.decrement-arrow {
+    -fx-background-color: null;
+    -fx-background-radius: 0;
+    -fx-background-insets: 0;
+    -fx-padding: 0;
+    /*-fx-shape: null;*/
+}

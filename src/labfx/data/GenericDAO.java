@@ -1,5 +1,7 @@
 package labfx.data;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -11,7 +13,7 @@ import java.io.Serializable;
  * Date: 15.10.13
  * Time: 14:25
  */
-public class GenericDAO<T extends Serializable> {
+public class GenericDAO<T extends Serializable> implements AutoCloseable {
     private Session session;
     private Transaction transaction;
     private Class<T> type;
@@ -21,13 +23,6 @@ public class GenericDAO<T extends Serializable> {
         session = Hibernate.getSessionFactory().openSession();
         transaction = session.getTransaction();
         transaction.begin();
-    }
-
-    @Override
-    protected void finalize() throws Throwable {
-        transaction.commit();
-        session.close();
-        super.finalize();
     }
 
     public void create(T t) {
@@ -40,8 +35,6 @@ public class GenericDAO<T extends Serializable> {
 
     public void update(T t) {
         session.merge(t);
-        transaction.commit();
-        transaction.begin();
     }
 
     public void delete(T t) {
@@ -59,15 +52,35 @@ public class GenericDAO<T extends Serializable> {
         }
     }
 
-    /*public Collection<T> getAll() {
-        List list = session.createQuery("SELECT t from " +
-                type.getSimpleName() + " t").list();
-
-        List<T> result = new ArrayList<T>();
-        for (T t : result) {
-            result.add(t);
+    public ObservableList<T> getAll() {
+        try {
+            return FXCollections.observableArrayList(session.createCriteria(type).list());
+        } catch (HibernateException ex) {
+            return FXCollections.observableArrayList();
         }
+    }
 
-        return result;
-    }*/
+    public void commit() {
+        if (transaction != null) {
+            transaction.commit();
+            transaction.begin();
+        }
+    }
+
+    private void clean() {
+        if (session.isConnected()) {
+            session.close();
+        }
+    }
+
+    @Override
+    protected void finalize() throws Throwable {
+        clean();
+        super.finalize();
+    }
+
+    @Override
+    public void close() throws Exception {
+        clean();
+    }
 }

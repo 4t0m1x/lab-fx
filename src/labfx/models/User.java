@@ -1,5 +1,8 @@
 package labfx.models;
 
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
+
 import javax.persistence.Basic;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -17,8 +20,11 @@ public class User implements Serializable {
     private String password;
     private String phone;
     private String country;
-    private Boolean admin;
-    private Boolean banned;
+    private BooleanProperty admin = new SimpleBooleanProperty();
+    private BooleanProperty banned = new SimpleBooleanProperty();
+
+    public BooleanProperty adminProperty() { return admin; }
+    public BooleanProperty bannedProperty() { return banned; }
 
     @javax.persistence.Column(name = "id")
     @Id
@@ -73,21 +79,21 @@ public class User implements Serializable {
     @javax.persistence.Column(name = "admin")
     @Basic
     public Boolean getAdmin() {
-        return admin;
+        return admin.get();
     }
 
     public void setAdmin(Boolean admin) {
-        this.admin = admin;
+        this.admin.set(admin);
     }
 
     @javax.persistence.Column(name = "banned")
     @Basic
     public Boolean getBanned() {
-        return banned;
+        return banned.get();
     }
 
     public void setBanned(Boolean banned) {
-        this.banned = banned;
+        this.banned.set(banned);
     }
 
     @Override

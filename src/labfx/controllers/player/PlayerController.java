@@ -6,12 +6,10 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
-import javafx.scene.layout.HBox;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
 import javafx.scene.text.Text;
-import javafx.util.Duration;
 import labfx.controllers.page.Page;
 
 import java.io.File;
@@ -49,6 +47,14 @@ public class PlayerController extends Page {
         });
 
         errorLabel.setVisible(!next());
+    }
+
+    @Override
+    public void onClosed() {
+        if (player != null) {
+            player.stop();
+            player.dispose();
+        }
     }
 
     private static Collection<File> getMediaFiles() {
@@ -99,6 +105,8 @@ public class PlayerController extends Page {
         mediaView.setMediaPlayer(player);
         mediaView.setFitWidth(720);
         mediaView.setFitHeight(500);
+
+        player.setVolume(volumeSlider.getValue());
     }
 
     private boolean next() {
@@ -150,7 +158,6 @@ public class PlayerController extends Page {
                     status == MediaPlayer.Status.STOPPED ||
                     status == MediaPlayer.Status.READY) {
                 player.play();
-
             }
         }
     }

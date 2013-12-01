@@ -9,15 +9,28 @@ package labfx.controllers.page;
 public class Page {
     protected Object parameter;
 
-    public Object getParameter() {
+    public final Object getParameter() {
         return parameter;
     }
 
-    public void setParameter(Object parameter) {
+    public final void setParameter(Object parameter) {
         this.parameter = parameter;
         onParameterChanged();
     }
 
+    public final void notifyLoaded() {
+        onLoaded();
+    }
+
+    public boolean canBeClosed() {
+        return true;
+    }
+
+    public final void close() {
+        onClosed();
+    }
+
     protected void onParameterChanged() { }
-    public void onLoaded() { }
+    protected void onLoaded() { }
+    protected void onClosed() { }
 }

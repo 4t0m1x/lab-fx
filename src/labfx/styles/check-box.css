@@ -1,0 +1,20 @@
+.check-box .box {
+    -fx-background-color: transparent;
+    -fx-background-insets: 0;
+    -fx-text-fill: -theme-foreground;
+    -fx-border-width: 1;
+    -fx-border-color: derive(-theme-foreground, -50%);
+}
+
+.check-box:hover .box {
+    -fx-border-color: -theme-foreground;
+}
+
+.check-box:focused .box {
+    -fx-border-width: 1;
+    -fx-border-color: -theme-accent;
+}
+
+.check-box:selected .mark {
+    -fx-background-color: -theme-foreground;
+}

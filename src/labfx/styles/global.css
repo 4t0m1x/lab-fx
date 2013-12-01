@@ -1,7 +1,14 @@
+.root {
+    -theme-background: #1e1e1e;
+    -theme-foreground: white;
+    -theme-accent: #1bc1fd;
+    -theme-error: #c81111;
+}
+
 .background {
-    -fx-background-color: #1e1e1e;
+    -fx-background-color: -theme-background;
 }
 
 .caption-pane {
-    -fx-background-color: #1bc1fd;
+    -fx-background-color: -theme-accent;
 }

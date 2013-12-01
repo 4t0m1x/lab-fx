@@ -1,16 +1,22 @@
-.field {
+@import "global.css";
+
+.text-field, .password-field {
     -fx-font-family: "Segoe UI", sans-serif;
+    -fx-font-smoothing-type: lcd;
     -fx-font-size: 14pt;
 
     -fx-padding: 5;
 
     -fx-background-radius: 0;
-    -fx-background-color: transparent;
-    -fx-text-fill: white;
-    -fx-highlight-fill: white;
-    -fx-highlight-text-fill: #1c1c1c;
+    -fx-background-color: -theme-background;
+    -fx-text-fill: -theme-foreground;
+    -fx-highlight-fill: -theme-foreground;
+    -fx-highlight-text-fill: -theme-background;
 
-    -fx-border-style: solid;
     -fx-border-width: 1px;
-    -fx-border-color: white;
+    -fx-border-color: derive(-theme-foreground, -50%);
+}
+
+.text-field:focused, .password-field:focused {
+    -fx-border-color: -theme-accent;
 }

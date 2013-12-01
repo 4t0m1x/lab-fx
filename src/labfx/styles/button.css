@@ -1,25 +1,39 @@
-.button {
-    -fx-font-size: 14;
-    -fx-font-family: "Segoe UI Semibold";
+@import "global.css";
 
-    -fx-background-insets: 0;
+.button {
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-font-smoothing-type: lcd;
+    -fx-font-size: 14;
+
     -fx-background-radius: 0;
+    -fx-background-insets: 0;
     -fx-background-color: transparent;
-    -fx-text-fill: white;
+    -fx-text-fill: -theme-foreground;
 
     -fx-border-width: 2;
-    -fx-border-color: white;
+    -fx-border-color: -theme-foreground;
+}
+
+.media-button {
+    -fx-border-radius: 50;
+    -fx-background-radius: 50;
 }
 
 .button:hover {
     -fx-background-color: rgba(255, 255, 255, 0.1);
 }
 
-.button:pressed {
-    -fx-background-color: white;
-    -fx-text-fill: black;
+.button:pressed:hover {
+    -fx-background-color: -theme-foreground;
+    -fx-text-fill: -theme-background;
+    -fx-border-color: -theme-foreground;
 }
 
 .button:focused {
-    -fx-border-width: 2.5;
+    -fx-border-width: 3;
+}
+
+.media-button:focused {
+    -fx-border-color: -theme-accent -theme-foreground -theme-foreground -theme-foreground;
+    -fx-border-width: 2;
 }

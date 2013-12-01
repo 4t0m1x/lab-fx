@@ -20,13 +20,13 @@
 
     <Label text="Username:" styleClass="label"
            GridPane.rowIndex="1" GridPane.columnIndex="0"/>
-    <TextField fx:id="userName" styleClass="field"
+    <TextField fx:id="userName"
                GridPane.hgrow="ALWAYS"
                GridPane.rowIndex="1" GridPane.columnIndex="1"/>
 
     <Label text="Password:" styleClass="label"
            GridPane.rowIndex="2" GridPane.columnIndex="0"/>
-    <PasswordField fx:id="password" styleClass="field"
+    <PasswordField fx:id="password"
                    GridPane.rowIndex="2" GridPane.columnIndex="1"
                    onAction="#signIn"/>
 

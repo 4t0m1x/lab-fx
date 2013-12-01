@@ -1,0 +1,32 @@
+.slider .thumb {
+    -fx-background-insets: 0;
+    -fx-background-radius: 50;
+    -fx-background-color: derive(-theme-background, 5%);
+
+    -fx-border-color: -theme-foreground;
+    -fx-border-width: 2;
+    -fx-border-radius: 50;
+}
+
+.slider:focused .thumb {
+    -fx-border-color:
+        -theme-accent
+        -theme-foreground
+        -theme-foreground
+        -theme-foreground;
+}
+
+.slider .thumb:hover {
+    -fx-background-color: derive(-theme-background, 20%);
+}
+
+.slider .thumb:pressed {
+    -fx-background-color: -theme-foreground;
+    -fx-border-color: -theme-foreground;
+}
+
+.slider .track {
+    -fx-background-insets: 0;
+    -fx-background-radius: 5;
+    -fx-background-color: rgba(255, 255, 255, 0.25);
+}

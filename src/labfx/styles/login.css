@@ -1,5 +1,7 @@
+@import "global.css";
+
 .error-text {
     -fx-font-family: "Segoe UI Semibold", sans-serif;
     -fx-font-size: 16pt;
-    -fx-text-fill: #c81111;
+    -fx-text-fill: -theme-error;
 }

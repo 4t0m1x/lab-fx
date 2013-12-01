@@ -34,7 +34,7 @@ public final class Navigator {
         Object controller = loader.getController();
         if (controller instanceof Page) {
             Page page = (Page)controller;
-            page.onLoaded();
+            page.notifyLoaded();
             return (T)page;
         }
 
@@ -53,7 +53,14 @@ public final class Navigator {
             host.show();
         }
 
-        return loader.getController();
+        Object controller = loader.getController();
+        if (controller instanceof Page) {
+            Page page = (Page)controller;
+            page.notifyLoaded();
+            return (T)page;
+        }
+
+        return null;
     }
 
     public static <T extends Page> T loadView(Stage host, View view, double width, double height)

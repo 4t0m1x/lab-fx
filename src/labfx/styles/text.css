@@ -1,11 +1,13 @@
 .caption {
     -fx-font-family: "Segoe UI Light", sans-serif;
+    -fx-font-smoothing-type: lcd;
     -fx-font-size: 22pt;
-    -fx-fill: white;
+    -fx-fill: -theme-foreground;
 }
 
 .label {
     -fx-font-family: "Segoe UI", sans-serif;
+    -fx-font-smoothing-type: lcd;
     -fx-font-size: 14pt;
-    -fx-text-fill: white;
+    -fx-text-fill: -theme-foreground;
 }

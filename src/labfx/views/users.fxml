@@ -1,9 +1,61 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.text.Text?>
 <?import java.net.URL?>
-<GridPane xmlns:fx="http://javafx.com/fxml">
-    <Text styleClass="caption">Users</Text>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.util.Callback?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.geometry.Insets?>
+<VBox xmlns:fx="http://javafx.com/fxml" fx:controller="labfx.controllers.UsersController"
+      GridPane.hgrow="ALWAYS">
+    <TableView fx:id="usersTable" editable="true">
+        <columns>
+            <TableColumn fx:id="columnUsername" text="Username" editable="true"/>
+            <TableColumn fx:id="columnPassword" text="Password" editable="true"/>
+            <TableColumn fx:id="columnPhone" text="Phone" editable="true"/>
+            <TableColumn fx:id="columnCountry" text="Country" editable="true"/>
+            <TableColumn fx:id="columnAdmin" text="Admin" editable="true"/>
+            <TableColumn fx:id="columnBanned" text="Banned" editable="true"/>
+        </columns>
+    </TableView>
+    <HBox>
+        <TextField fx:id="newUsername"/>
+        <TextField fx:id="newPassword"/>
+        <TextField fx:id="newPhone"/>
+        <TextField fx:id="newCountry"/>
+        <GridPane fx:id="newAdminPane" alignment="CENTER">
+            <CheckBox fx:id="newAdmin"/>
+        </GridPane>
+        <GridPane fx:id="newBannedPane" alignment="CENTER">
+            <CheckBox fx:id="newBanned"/>
+        </GridPane>
+    </HBox>
+    <HBox spacing="15">
+        <VBox.margin>
+            <Insets top="20"/>
+        </VBox.margin>
+        <padding>
+            <Insets left="10"/>
+        </padding>
+        <Button text="Add user" onAction="#addUser"/>
+        <Button text="Delete user" onAction="#deleteUser"/>
+        <Button text="Save users" onAction="#saveUsers"/>
+    </HBox>
+    <HBox spacing="10">
+        <VBox.margin>
+            <Insets top="20"/>
+        </VBox.margin>
+        <Text fx:id="errorLabel" visible="false" style="-fx-font-size: 16pt;-fx-fill: -theme-error"/>
+        <Button fx:id="btnClearError" visible="false" text="Got it!" onAction="#clearError" alignment="CENTER"/>
+    </HBox>
     <stylesheets>
         <URL value="@../styles/text.css"/>
+        <URL value="@../styles/field.css"/>
+        <URL value="@../styles/check-box.css"/>
+        <URL value="@../styles/table.css"/>
     </stylesheets>
-</GridPane>
+</VBox>
