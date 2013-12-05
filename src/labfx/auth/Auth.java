@@ -1,6 +1,6 @@
 package labfx.auth;
 
-import labfx.data.GenericDAO;
+import labfx.data.BufferedDAO;
 import labfx.models.User;
 import org.hibernate.HibernateException;
 
@@ -14,7 +14,7 @@ public class Auth {
         User user;
         try
         {
-            GenericDAO<User> userDAO = new GenericDAO<User>(User.class);
+            BufferedDAO<User> userDAO = new BufferedDAO<>(User.class);
             user = userDAO.getByField("userName", userName);
 
         } catch (HibernateException e)

@@ -103,8 +103,8 @@ public class PlayerController extends Page {
 
         sourceLabel.setText(new File(player.getMedia().getSource()).getName().replace("%20", " "));
         mediaView.setMediaPlayer(player);
-        mediaView.setFitWidth(720);
-        mediaView.setFitHeight(500);
+        mediaView.setFitWidth(900);
+        mediaView.setFitHeight(625);
 
         player.setVolume(volumeSlider.getValue());
     }

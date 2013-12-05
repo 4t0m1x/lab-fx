@@ -1,15 +1,18 @@
-package labfx.controllers;
+package labfx.controllers.users;
 
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 import labfx.controllers.page.Page;
-import labfx.data.GenericDAO;
+import labfx.data.BufferedDAO;
 import labfx.models.User;
 
 public class UsersController extends Page {
@@ -48,7 +51,7 @@ public class UsersController extends Page {
     @FXML
     private GridPane newBannedPane;
 
-    private GenericDAO<User> userDAO;
+    private BufferedDAO<User> userDAO;
 
     @FXML
     private Button btnClearError;
@@ -82,12 +85,63 @@ public class UsersController extends Page {
         columnAdmin.widthProperty().addListener(new WidthListener(newAdminPane));
         columnBanned.widthProperty().addListener(new WidthListener(newBannedPane));
 
-        userDAO = new GenericDAO<>(User.class);
-        usersTable.setItems(userDAO.getAll());
+        userDAO = new BufferedDAO<>(User.class);
+        usersTable.setItems(userDAO.getEntries());
+
+        EventHandler<ActionEvent> addUser = new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                addUser();
+            }
+        };
+        newUsername.setOnAction(addUser);
+        newPassword.setOnAction(addUser);
+        newPhone.setOnAction(addUser);
+        newCountry.setOnAction(addUser);
+
+        usersTable.setOnKeyPressed(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent keyEvent) {
+                if (keyEvent.getCode() == KeyCode.DELETE) {
+                    deleteUser();
+                }
+            }
+        });
+    }
+
+    private static Integer tryParseInteger(String text) {
+        try {
+            return new Integer(text);
+        } catch (NumberFormatException e) {
+            return null;
+        }
+    }
+
+    private boolean checkUser(User user) {
+        if (user.getUserName().isEmpty() ||
+                user.getPassword().isEmpty()) {
+            error("Enter username and password, please");
+            return false;
+        }
+
+        for (User u : usersTable.getItems()) {
+            if (user != u && u.getUserName().equals(user.getUserName())) {
+                error(String.format("A user with name \"%s\" already exists", user.getUserName()));
+                return false;
+            }
+        }
+
+        if (!user.getPhone().isEmpty() &&
+                tryParseInteger(user.getPhone()) == null) {
+            error(String.format("Phone should only consist of digits (\"%s\")", user.getPhone()));
+            return false;
+        }
+
+        return true;
     }
 
     @FXML
-    private void addUser(ActionEvent actionEvent) {
+    private void addUser() {
         clearError();
 
         User newUser = new User();
@@ -99,21 +153,10 @@ public class UsersController extends Page {
         newUser.setAdmin(newAdmin.isSelected());
         newUser.setBanned(newBanned.isSelected());
 
-        if (newUser.getUserName().isEmpty() ||
-            newUser.getPassword().isEmpty()) {
-            error("Enter username and password, please");
+        if (!checkUser(newUser))
             return;
-        }
 
-        for (User user : usersTable.getItems()) {
-            if (user.getUserName().equals(newUser.getUserName())) {
-                error(String.format("A user with name \"%s\" already exists", user.getUserName()));
-                return;
-            }
-        }
-
-        usersTable.getItems().add(newUser);
-        userDAO.create(newUser);
+        userDAO.add(newUser);
 
         newUsername.clear();
         newPassword.clear();
@@ -124,24 +167,28 @@ public class UsersController extends Page {
     }
 
     @FXML
-    private void deleteUser(ActionEvent actionEvent) {
+    private void deleteUser() {
         User selectedUser = usersTable.getSelectionModel().getSelectedItem();
         if (selectedUser != null) {
-            usersTable.getItems().remove(selectedUser);
-            userDAO.delete(selectedUser);
+            userDAO.remove(selectedUser);
             usersTable.getSelectionModel().clearSelection();
         }
     }
 
     @FXML
-    private void saveUsers(ActionEvent actionEvent) {
+    private void saveUsers() {
         clearError();
+
+        for (User user : usersTable.getItems()) {
+            if (!checkUser(user))
+                return;
+        }
 
         boolean foundNotBannedAdmin = false;
         for (User user : usersTable.getItems()) {
             if (user.getAdmin() && !user.getBanned()) {
                 foundNotBannedAdmin = true;
-                return;
+                break;
             }
         }
 
@@ -170,15 +217,5 @@ public class UsersController extends Page {
     @Override
     public boolean canBeClosed() {
         return canBeClosed;
-    }
-
-    @Override
-    protected void onClosed() {
-        if (userDAO != null) {
-            try {
-                userDAO.close();
-            } catch (Exception e){
-            }
-        }
     }
 }

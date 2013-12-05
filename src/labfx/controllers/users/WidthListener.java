@@ -1,4 +1,4 @@
-package labfx.controllers;
+package labfx.controllers.users;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;

@@ -10,7 +10,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.geometry.Insets?>
-<VBox xmlns:fx="http://javafx.com/fxml" fx:controller="labfx.controllers.UsersController"
+<VBox xmlns:fx="http://javafx.com/fxml" fx:controller="labfx.controllers.users.UsersController"
       GridPane.hgrow="ALWAYS">
     <TableView fx:id="usersTable" editable="true">
         <columns>

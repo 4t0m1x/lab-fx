@@ -2,11 +2,13 @@ package labfx.models;
 
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 
 import javax.persistence.Basic;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import java.io.Serializable;
+import javax.persistence.Transient;
 
 /**
  * User: Vladislav
@@ -14,15 +16,19 @@ import java.io.Serializable;
  * Time: 16:58
  */
 @Entity
-public class User implements Serializable {
+public class User {
     private int id;
-    private String userName;
-    private String password;
-    private String phone;
-    private String country;
+    private StringProperty userName = new SimpleStringProperty();
+    private StringProperty password = new SimpleStringProperty();
+    private StringProperty phone = new SimpleStringProperty();
+    private StringProperty country = new SimpleStringProperty();
     private BooleanProperty admin = new SimpleBooleanProperty();
     private BooleanProperty banned = new SimpleBooleanProperty();
 
+    public StringProperty userNameProperty() { return userName; }
+    public StringProperty passwordProperty() { return password; }
+    public StringProperty phoneProperty() { return phone; }
+    public StringProperty countryProperty() { return country; }
     public BooleanProperty adminProperty() { return admin; }
     public BooleanProperty bannedProperty() { return banned; }
 
@@ -39,41 +45,41 @@ public class User implements Serializable {
     @javax.persistence.Column(name = "userName")
     @Basic
     public String getUserName() {
-        return userName;
+        return userName.get();
     }
 
     public void setUserName(String userName) {
-        this.userName = userName;
+        this.userName.set(userName);
     }
 
     @javax.persistence.Column(name = "password")
     @Basic
     public String getPassword() {
-        return password;
+        return password.get();
     }
 
     public void setPassword(String password) {
-        this.password = password;
+        this.password.set(password);
     }
 
     @javax.persistence.Column(name = "phone")
     @Basic
     public String getPhone() {
-        return phone;
+        return phone.get();
     }
 
     public void setPhone(String phone) {
-        this.phone = phone;
+        this.phone.set(phone);
     }
 
     @javax.persistence.Column(name = "country")
     @Basic
     public String getCountry() {
-        return country;
+        return country.get();
     }
 
     public void setCountry(String country) {
-        this.country = country;
+        this.country.set(country);
     }
 
     @javax.persistence.Column(name = "admin")
