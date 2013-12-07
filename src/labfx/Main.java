@@ -23,12 +23,13 @@ public class Main extends Application {
 
     public static void showLogin(final Stage stage) {
         try {
-                /*User user = new User();
-            user.setAdmin(true);
-            setMain((MainController)Navigator.loadView(primaryStage, View.MAIN, 1066, 600, "JavaFX"));
-            main.setParameter(user);*/
+            User user = new User();
+            //user.setAdmin(true);
+            user.setUserName("Float");
+            setMain((MainController)Navigator.loadView(stage, View.MAIN, 1066, 600, "JavaFX"));
+            main.setParameter(user);
 
-            LoginController login = Navigator.loadView(stage, View.LOGIN, 360, 195, "Login");
+            /*LoginController login = Navigator.loadView(stage, View.LOGIN, 360, 195, "Login");
             login.setReturnAction(new Action<User>() {
                 @Override
                 public void action(EventArgs<User> e) {
@@ -40,7 +41,7 @@ public class Main extends Application {
                     }
                     catch (IOException ex) {  }
                 }
-            });
+            });*/
         } catch (IOException e) {
             Platform.exit();
         }

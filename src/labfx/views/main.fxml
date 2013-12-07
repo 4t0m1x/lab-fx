@@ -20,13 +20,14 @@
       <HBox.margin>
           <Insets left="10" top="10" right="10" bottom="10"/>
       </HBox.margin>
-      <Button text="Player" onAction="#showMediaPlayer" />
-      <Button fx:id="btnUsers" text="Users" onAction="#showUsers"/>
-      <Button text="Logout" onAction="#logout"/>
+      <Text fx:id="textUsername" styleClass="caption"/>
+      <Accordion fx:id="accordion"/>
   </VBox>
   <GridPane fx:id="contentRoot" HBox.hgrow="ALWAYS" alignment="TOP_CENTER"/>
   <stylesheets>
       <URL value="@../styles/global.css"/>
       <URL value="@../styles/button.css"/>
+      <URL value="@../styles/text.css"/>
+      <URL value="@../styles/titled-pane.css"/>
   </stylesheets>
 </HBox>

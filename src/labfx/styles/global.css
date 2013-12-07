@@ -3,6 +3,11 @@
     -theme-foreground: white;
     -theme-accent: #1bc1fd;
     -theme-error: #c81111;
+
+    -theme-alter: #83fd2b;
+    -theme-alter2: #fd3399;
+    -theme-alter3: #f0eb4c;
+    -theme-alter4: #16c897;
 }
 
 .background {

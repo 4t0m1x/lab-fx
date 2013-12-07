@@ -1,0 +1,17 @@
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.web.WebView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Button?>
+<?import java.net.URL?>
+<VBox xmlns:fx="http://javafx.com/fxml" fx:controller="labfx.controllers.BrowserController">
+    <WebView fx:id="browser"/>
+    <HBox>
+        <TextField fx:id="addressField" HBox.hgrow="ALWAYS" onAction="#webGo"/>
+        <Button text="Go" onAction="#webGo"/>
+    </HBox>
+    <stylesheets>
+        <URL value="@../styles/field.css"/>
+    </stylesheets>
+</VBox>

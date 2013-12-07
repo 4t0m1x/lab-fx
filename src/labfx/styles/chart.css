@@ -1,0 +1,84 @@
+.chart-series-line {
+    -fx-stroke-width: 2px;
+    -fx-effect: null;
+}
+
+.default-color0.chart-series-line { -fx-stroke: -theme-accent; }
+.default-color1.chart-series-line { -fx-stroke: -theme-alter; }
+.default-color2.chart-series-line { -fx-stroke: -theme-alter2; }
+.default-color3.chart-series-line { -fx-stroke: -theme-alter3; }
+.default-color4.chart-series-line { -fx-stroke: -theme-alter4; }
+
+.default-color0.chart-line-symbol { -fx-background-color: -theme-accent; -fx-padding: 0; }
+.default-color1.chart-line-symbol { -fx-background-color: -theme-alter; -fx-padding: 0; }
+.default-color2.chart-line-symbol { -fx-background-color: -theme-alter2; -fx-padding: 0; }
+.default-color3.chart-line-symbol { -fx-background-color: -theme-alter3; -fx-padding: 0; }
+.default-color4.chart-line-symbol { -fx-background-color: -theme-alter4; -fx-padding: 0; }
+
+.default-color0.chart-bar { -fx-background-color: -theme-accent; }
+.default-color1.chart-bar { -fx-background-color: -theme-alter; }
+.default-color2.chart-bar { -fx-background-color: -theme-alter2; }
+.default-color3.chart-bar { -fx-background-color: -theme-alter3; }
+.default-color4.chart-bar { -fx-background-color: -theme-alter4; }
+
+.default-color0.chart-pie { -fx-background-color: -theme-accent; }
+.default-color1.chart-pie { -fx-background-color: -theme-alter; }
+.default-color2.chart-pie { -fx-background-color: -theme-alter2; }
+.default-color3.chart-pie { -fx-background-color: -theme-alter3; }
+.default-color4.chart-pie { -fx-background-color: -theme-alter4; }
+
+.chart-title {
+    -fx-text-fill: -theme-foreground;
+    -fx-font-family: "Segoe UI Light", sans-serif;
+    -fx-font-smoothing-type: lcd;
+    -fx-font-size: 22pt;
+}
+
+.axis {
+    -fx-font-size: 1.4em;
+    -fx-tick-label-fill: -theme-foreground;
+    -fx-tick-length: 20;
+    -fx-minor-tick-length: 10;
+}
+
+.axis-label {
+    -fx-text-fill: -theme-foreground;
+}
+
+.chart-legend {
+    -fx-background-color:  transparent;
+}
+
+.chart-plot-background {
+    -fx-background-color: -theme-background;
+}
+.chart-vertical-grid-lines {
+    -fx-stroke: derive(-theme-background, 50%);
+}
+.chart-horizontal-grid-lines {
+    -fx-stroke: derive(-theme-background, 50%);
+}
+.chart-alternative-row-fill {
+    -fx-fill: derive(-theme-background, 15%);
+    -fx-stroke: transparent;
+    -fx-stroke-width: 0;
+}
+
+.chart-bar {
+    -fx-background-color: -theme-accent;
+    -fx-background-radius: 0;
+}
+
+.chart-pie {
+    -fx-pie-color: -theme-accent;
+    -fx-border-width: 0;
+}
+
+.chart-pie-label-line {
+    -fx-stroke: -theme-accent;
+    -fx-fill: -theme-background;
+}
+
+.chart-pie-label {
+    -fx-fill: -theme-foreground;
+}

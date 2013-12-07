@@ -45,14 +45,15 @@ public class BufferedDAO<T> {
     public void commit() {
         if (entries == null) throw new IllegalStateException();
 
-        execute(new HibernateCommand() {
-            @Override
-            public void execute(Session session) {
-                for (T entry : entries) {
+        for (final T entry : entries) {
+            execute(new HibernateCommand() {
+                @Override
+                public void execute(Session session) {
                     session.saveOrUpdate(session.merge(entry));
+
                 }
-            }
-        });
+            });
+        }
 
         execute(new HibernateCommand() {
             @Override

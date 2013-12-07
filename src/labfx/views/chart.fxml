@@ -1,0 +1,20 @@
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.chart.LineChart?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.Button?>
+<?import java.net.URL?>
+<VBox xmlns:fx="http://javafx.com/fxml" fx:controller="labfx.controllers.ChartController"
+        spacing="25">
+    <GridPane fx:id="chartHost" alignment="BASELINE_CENTER"/>
+    <HBox spacing="10" alignment="BASELINE_CENTER">
+        <Button text="LineChart" onAction="#loadLineChart"/>
+        <Button text="PieChart" onAction="#loadPieChart"/>
+        <Button text="BarChart" onAction="#loadBarChart"/>
+        <Button fx:id="btnNextValue" text="Next value" onAction="#nextValue"/>
+    </HBox>
+
+    <stylesheets>
+        <URL value="@../styles/chart.css"/>
+    </stylesheets>
+</VBox>
