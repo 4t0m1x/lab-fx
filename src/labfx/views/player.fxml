@@ -1,15 +1,10 @@
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.Reflection?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.media.MediaView?>
 <?import javafx.scene.text.Text?>
 <?import java.net.URL?>
-<?import javafx.scene.media.MediaView?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.control.Slider?>
-<?import javafx.scene.control.Label?>
-
 <VBox xmlns:fx="http://javafx.com/fxml" fx:controller="labfx.controllers.player.PlayerController"
       alignment="CENTER" GridPane.hgrow="ALWAYS">
     <Text styleClass="caption">Player</Text>
@@ -18,23 +13,36 @@
             <HBox.margin>
                 <Insets right="10"/>
             </HBox.margin>
+            <effect>
+                <Reflection fraction="0.6"/>
+            </effect>
         </Button>
-        <Button text="&lt;&lt;" onAction="#prevMedia" styleClass="media-button">
+        <Button fx:id="btnPrev" text="&lt;&lt;" onAction="#prevMedia" styleClass="media-button">
             <HBox.margin>
                 <Insets right="10"/>
             </HBox.margin>
+            <effect>
+                <Reflection fraction="0.6"/>
+            </effect>
         </Button>
-        <Button text="&gt;&gt;" onAction="#nextMedia" styleClass="media-button">
+        <Button fx:id="btnNext" text="&gt;&gt;" onAction="#nextMedia" styleClass="media-button">
             <HBox.margin>
                 <Insets right="10"/>
             </HBox.margin>
+            <effect>
+                <Reflection fraction="0.6"/>
+            </effect>
         </Button>
         <Label fx:id="sourceLabel">
             <HBox.margin>
                 <Insets right="10"/>
             </HBox.margin>
         </Label>
-        <Slider fx:id="volumeSlider" min="0" max="1" minorTickCount="100" value="1"/>
+        <Slider fx:id="volumeSlider" min="0" max="1" minorTickCount="100" value="1">
+            <effect>
+                <Reflection fraction="0.6"/>
+            </effect>
+        </Slider>
     </HBox>
     <Text fx:id="errorLabel" styleClass="label" style="-fx-fill: -theme-error" visible="false">No media found</Text>
     <MediaView fx:id="mediaView" preserveRatio="true"/>

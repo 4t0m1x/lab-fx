@@ -1,15 +1,17 @@
 package labfx.controllers.player;
 
+import javafx.animation.ScaleTransition;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.Slider;
+import javafx.scene.control.*;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
 import javafx.scene.text.Text;
+import javafx.util.Duration;
 import labfx.controllers.page.Page;
 
 import java.io.File;
@@ -18,6 +20,7 @@ import java.util.Collection;
 import java.util.Collections;
 
 public class PlayerController extends Page {
+    //<editor-fold desc="Fields">
     @FXML
     private Text errorLabel;
     @FXML
@@ -27,15 +30,48 @@ public class PlayerController extends Page {
     @FXML
     private Button btnPlay;
     @FXML
+    private Button btnPrev;
+    @FXML
+    private Button btnNext;
+    @FXML
     private MediaView mediaView;
 
     private MediaPlayer player;
     private TwoWayEnumerator<File> mediaEnumerator;
 
     private static final String mediaFolder = "media";
+    //</editor-fold>
+
+    private void playScaleAnimation(Control control, final double amount, double duration) {
+        final ScaleTransition scaleTransition = new ScaleTransition(Duration.millis(duration), control);
+        scaleTransition.setToX(amount);
+        scaleTransition.setToY(amount);
+        scaleTransition.playFromStart();
+    }
 
     @Override
     public void onLoaded() {
+        final EventHandler<MouseEvent> scaleEnter = new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                playScaleAnimation((Control)mouseEvent.getSource(), 1.1, 100);
+            }
+        };
+
+        final EventHandler<MouseEvent> scaleExit = new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                playScaleAnimation((Control)mouseEvent.getSource(), 1.0, 50);
+            }
+        };
+
+        btnPlay.setOnMouseEntered(scaleEnter);
+        btnPlay.setOnMouseExited(scaleExit);
+        btnNext.setOnMouseEntered(scaleEnter);
+        btnNext.setOnMouseExited(scaleExit);
+        btnPrev.setOnMouseEntered(scaleEnter);
+        btnPrev.setOnMouseExited(scaleExit);
+
         mediaEnumerator = EnumeratorFactory.getTwoWayEnumerator(getMediaFiles());
 
         volumeSlider.valueProperty().addListener(new InvalidationListener() {

@@ -20,7 +20,7 @@ import java.util.ArrayList;
 public class BufferedDAO<T> {
     private Class<T> type;
 
-    private ObservableList<T> entries;
+    private ObservableList<T> entries = FXCollections.observableArrayList();
     private ArrayList<T> removedEntries = new ArrayList<>();
 
     public BufferedDAO(Class<T> type) {
@@ -70,16 +70,14 @@ public class BufferedDAO<T> {
     public ObservableList<T> getEntries() {
         final ObjectProperty<ObservableList<T>> result = new SimpleObjectProperty<>();
 
-        if (entries == null) {
-            execute(new HibernateCommand() {
+        execute(new HibernateCommand() {
                 @Override
                 public void execute(Session session) {
-                    result.set(FXCollections.observableArrayList(session.createCriteria(type).list()));
-                }
+                result.set(FXCollections.observableArrayList(session.createCriteria(type).list()));
+            }
             });
 
-            entries = result.get();
-        }
+        entries = result.get();
 
         return entries;
     }

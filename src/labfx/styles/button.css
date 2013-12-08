@@ -14,10 +14,6 @@
     -fx-border-color: -theme-foreground;
 }
 
-.media-button {
-    -fx-border-radius: 50;
-    -fx-background-radius: 50;
-}
 
 .button:hover {
     -fx-background-color: rgba(255, 255, 255, 0.1);
@@ -31,6 +27,11 @@
 
 .button:focused {
     -fx-border-width: 3;
+}
+
+.media-button {
+    -fx-border-radius: 50;
+    -fx-background-radius: 50;
 }
 
 .media-button:focused {

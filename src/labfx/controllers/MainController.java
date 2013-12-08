@@ -1,6 +1,5 @@
 package labfx.controllers;
 
-import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -8,19 +7,18 @@ import javafx.scene.Node;
 import javafx.scene.control.Accordion;
 import javafx.scene.control.Button;
 import javafx.scene.control.TitledPane;
+import javafx.scene.input.DragEvent;
+import javafx.scene.input.TransferMode;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import labfx.Main;
 import labfx.Navigator;
-import labfx.controllers.page.Action;
-import labfx.controllers.page.EventArgs;
+import labfx.controllers.extensions.SupportedImages;
 import labfx.controllers.page.Page;
 import labfx.models.User;
 import labfx.views.View;
-
-import java.awt.event.MouseEvent;
-import java.io.IOException;
+import sun.security.util.Debug;
 
 /**
  * Date: 28.11.13
@@ -38,6 +36,33 @@ public class MainController extends Page {
 
     @FXML
     private Text textUsername;
+
+    @Override
+    protected void onLoaded() {
+
+        contentRoot.setOnDragOver(new EventHandler<DragEvent>() {
+            @Override
+            public void handle(DragEvent dragEvent) {
+                if (dragEvent.getDragboard().hasFiles() && new SupportedImages()
+                        .accept(dragEvent.getDragboard().getFiles().get(0))) {
+                    dragEvent.acceptTransferModes(TransferMode.LINK);
+                    dragEvent.consume();
+                }
+            }
+        });
+
+        contentRoot.setOnDragDropped(new EventHandler<DragEvent>() {
+            @Override
+            public void handle(DragEvent dragEvent) {
+                String style = String.format("-fx-background-image: url(\"%s\");" +
+                        "-fx-background-repeat: stretch;" +
+                        "-fx-background-size: contain;",
+                        dragEvent.getDragboard().getFiles().get(0).toURI().toString());
+                contentRoot.setStyle(style);
+            }
+        });
+
+    }
 
     @Override
     protected void onParameterChanged() {
@@ -84,12 +109,8 @@ public class MainController extends Page {
             });
             addPane(accordion, "Logout", null, logoutButton);
 
-            if (user.getAdmin()) {
-                loadView(View.USERS);
-            } else {
-                loadView(View.PLAYER);
-            }
 
+            loadView( user.getAdmin() ? View.USERS : View.PLAYER );
             accordion.getPanes().get(0).setExpanded(true);
         }
     }
